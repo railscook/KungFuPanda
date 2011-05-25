@@ -1,0 +1,24 @@
+<h1>Editing meter_field</h1>
+
+<% form_for(@meter_field) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :meter_id %><br />
+    <%= f.text_field :meter_id %>
+  </p>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :data %><br />
+    <%= f.text_field :data %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @meter_field %> |
+<%= link_to 'Back', meter_fields_path %>

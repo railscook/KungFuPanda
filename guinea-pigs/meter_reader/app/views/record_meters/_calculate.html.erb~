@@ -1,0 +1,14 @@
+<span>
+<pre>
+<% result = calculate_meter meters %>
+
+Day Rate <%= unit result[:day_rate] %>
+Night Rate <%= unit result[:night_rate] %>
+
+Day Cost <%= money result[:day_cost] %>
+Night Cost <%= money result[:night_cost] %>
+----------------
+Total <%= money result[:total_cost] %>
+</pre>
+
+</span>

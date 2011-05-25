@@ -1,0 +1,16 @@
+<h1>Editing meter</h1>
+
+<% form_for(@meter) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :read_on %><br />
+    <%= f.date_select :read_on %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @meter %> |
+<%= link_to 'Back', meters_path %>

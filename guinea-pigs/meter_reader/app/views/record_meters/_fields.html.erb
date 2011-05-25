@@ -1,0 +1,11 @@
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :read_on %><br />
+    <%= f.date_select :read_on %>
+  </p>
+  <div id="meter_fields">
+    <%= render :partial => 'meter_field', :collection => @meter.meter_fields %>
+  </div>
+  <p> <%= add_meter_field_link "Add a rate" %></p>
+

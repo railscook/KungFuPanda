@@ -1,0 +1,10 @@
+<p>
+  <b>Read on:</b>
+  <%=h @meter.read_on %>
+</p>
+
+  <div id="meter_fields">
+    <%= render :partial => 'meter_field', :collection => @meter.meter_fields %>
+  </div>
+<%= link_to 'Edit', edit_record_meter_path(@meter) %> |
+<%= link_to 'Back', record_meters_path %>

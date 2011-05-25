@@ -1,0 +1,13 @@
+<h1>Listing meters</h1>
+
+<% @meter_months.each do |date, meters| %>
+<div style="width: 20%; margin: 0 0 0 10px; float: left;">
+		<%= link_to date.strftime("%B %Y"), 
+								record_meters_path(:date => date)%>
+	  <%= render :partial => "calculate", :locals => {:meters => meters}%>
+</div>
+<% end %>
+
+<br style="clear: both"/>
+
+<%= link_to 'New meter', new_record_meter_path %>

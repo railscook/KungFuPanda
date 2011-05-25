@@ -1,0 +1,32 @@
+<h1>Listing meters</h1>
+
+<div style="float: right; width: 30%; positon: absolute;">
+	<%= render :partial => "calculate", :locals => {:meters => @meters}%>
+</div>
+<table>
+  <tr>
+    <th>Read on</th>
+  </tr>
+
+<% @meters.each do |meter| %>
+  <tr>
+   <td></td>
+   <td><%= meter.day_diff %></td>
+   <td><%= meter.night_diff %></td>
+
+  </tr>
+  <tr>
+    <td><%= link_to h(meter.read_on), record_meter_path(meter) %></td>
+    <td><%= meter.day_rate %></td>
+    <td><%= meter.night_rate%></td>
+
+    <td><%= link_to 'Edit', edit_record_meter_path(meter) %></td>
+    <td><%= link_to 'Destroy', record_meter_path(meter), :confirm => 'Are you sure?', :method => :delete %></td>
+    <td style="color: red"><%= "MISSING RECORDS" if meter.meter_fields.size < 2 %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New meter', new_record_meter_path %>

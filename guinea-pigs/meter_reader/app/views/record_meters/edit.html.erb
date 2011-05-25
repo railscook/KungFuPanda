@@ -1,0 +1,11 @@
+<h1>Editing meter</h1>
+
+<% form_for(:meter, :url => record_meter_path(@meter), :html => {:method => :put}) do |f| %>
+  <%= render :partial => "fields", :locals => {:f => f} %>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', record_meter_path(@meter) %> |
+<%= link_to 'Back', record_meters_path %>

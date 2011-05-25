@@ -1,0 +1,19 @@
+<div class="meter_field">
+  <%#= f.error_messages %>
+
+  <% @meter_field = meter_field%>
+  <%= error_messages_for :meter_field%>
+
+  <% fields_for_meter_field(meter_field) do |mf|%>
+  <table>
+   <tr>
+    <td><%= mf.label :name %></td>
+    <td><%= mf.label :data %></td>
+  </tr>
+   <tr>
+    <td> <%= mf.select :name, @charge_types  %></td>
+    <td> <%= mf.text_field :data %></td>
+  </tr>
+ </table>
+ <% end %>
+</div>

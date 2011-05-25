@@ -1,0 +1,12 @@
+  <%= f.error_messages %>
+
+  <table>
+   <tr>
+    <td><%= f.label :name %></td>
+    <td><%= f.label :data %></td>
+  </tr>
+   <tr>
+    <td> <%= f.select :name, Meter::charge_types  %></td>
+    <td> <%= f.text_field :data %></td>
+  </tr>
+ </table>
