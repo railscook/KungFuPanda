@@ -1,0 +1,145 @@
+diff --git a/Classes/Person.m b/Classes/Person.m
+index b129242..ddc20ea 100644
+--- a/Classes/Person.m
++++ b/Classes/Person.m
+@@ -10,9 +10,21 @@
+ #import "Dog.h"
+ #import "ObjectiveResource.h"
+ 
++@interface Person ()
++
++-(NSString *) nestedPath;
++
++@end
++
+ @implementation Person 
+ @synthesize createdAt , updatedAt , name , personId;
+ 
++-(NSString *) params{
++    return [NSString stringWithFormat:@"{\"person\":{\"name\":\"%@\"}}", self.name];
++}
++-(NSString *) toJSON{
++    return [NSString stringWithFormat:@"{\"person\":{\"name\":\"%@\"}}", self.name];
++}
+ 
+ // handle pluralization 
+ + (NSString *)getRemoteCollectionName {
+@@ -30,6 +42,39 @@
+ 	return [Dog findRemote:[NSString stringWithFormat:@"%@/%@",personId,@"dogs",nil] withResponse:aError];
+ }
+ 
++- (BOOL)createRemoteWithResponse:(NSError **)aError {
++    NSLog(@"createRemoteWithResponse");
++    NSLog(@"self %@", self);
++    NSLog(@"name \n %@", [self name]);
++    NSLog(@"toJSON \n %@", [self toJSON]);
++        NSLog(@"params \n %@", [self params]);
++          
++	return [self createRemoteAtPath:[[self class] getRemoteElementPath:[self nestedPath]] withResponse:aError];
++}
++
++- (BOOL)updateRemoteWithResponse:(NSError **)aError {
++	return [self updateRemoteAtPath:[[self class] getRemoteElementPath:[self nestedPath]] withResponse:aError];	
++}
++
++- (BOOL)destroyRemoteWithResponse:(NSError **)aError {
++	return [self destroyRemoteAtPath:[[self class] getRemoteElementPath:[self nestedPath]] withResponse:aError];
++}
++
++-(NSString *) nestedPath {
++	NSString *path = [NSString stringWithFormat:@"people",nil];
++	if(personId) {
++		path = [path stringByAppendingFormat:@"/%@",personId,nil];
++	}
++	return path;
++}
++
++
++-(NSObject *)initWithObject{
++    Person *p = [[Person alloc] init];
++    p.name = @"EEEE";
++    
++    return p;
++}
+ - (void) dealloc
+ {
+   [createdAt release];
+diff --git a/Classes/objective_resourceAppDelegate.m b/Classes/objective_resourceAppDelegate.m
+index 4d4bc27..9e8b80f 100644
+--- a/Classes/objective_resourceAppDelegate.m
++++ b/Classes/objective_resourceAppDelegate.m
+@@ -8,24 +8,70 @@
+ 
+ #import "objective_resourceAppDelegate.h"
+ #import "ObjectiveResource.h"
++#import "ASIHTTPRequest.h"
++#import "ASIFormDataRequest.h"
+ 
+ @implementation objective_resourceAppDelegate
+ 
+ @synthesize window, navigationController;
++- (void)loadServerData
++{
++    // Step 1
++    NSString *website =@"http://0.0.0.0:3000";
++    NSLog(@"From viewDidLoad request foo bar list \n %@", website);
++    
++    NSURL *url = [NSURL URLWithString:website];
++    
++    
++    __block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
++    
++    
++    [request setCompletionBlock:^{
++        // Use when fetching text data
++        NSString *responseString = [request responseString];
++        
++        // authenticityToken
++        NSString *authenticityToken = [[request responseHeaders] objectForKey:@"X-Authenticity-Token"];
++        NSLog(@"authenticityToken \n %@", authenticityToken);
++        
++        if([responseString length] == 0){
++            [responseString release];
++            return;
++        }
++        
++        NSLog(@"responseHeaders \n %@", [request responseHeaders]);
++        
++//        NSArray *arr = [_parser objectWithString:responseString error:nil];
++        
++//        list = [[NSMutableArray arrayWithArray:arr] retain];
++        
++//        [self.tableView reloadData];
++    }];
++    [request setFailedBlock:^{
++        NSError *error = [request error];
++    }];
++    [request startAsynchronous];
++
++}
++
+ 
+ - (void)applicationDidFinishLaunching:(UIApplication *)application {	
+-	
++	[self loadServerData];
++    
+ 	//Configure ObjectiveResource
+ 	[ObjectiveResourceConfig setSite:@"http://localhost:3000/"];
+ 	
+ 	// dogs is password protected
+ 	[ObjectiveResourceConfig setUser:@"Hiro"];
+-  [ObjectiveResourceConfig setPassword:@"Protagonist"];
++    [ObjectiveResourceConfig setPassword:@"Protagonist"];
++    
++    
+ 	// use json
+-	//[ObjectiveResourceConfig setResponseType:JSONResponse];
++	// TODO: [swe] change this for JSON
++	[ObjectiveResourceConfig setResponseType:JSONResponse];
+ 	
+ 	// use xml
+-	[ObjectiveResourceConfig setResponseType:XmlResponse];
++	//[ObjectiveResourceConfig setResponseType:XmlResponse];
+ 	[window addSubview:navigationController.view];
+ 	
+ 	// Override point for customization after app launch	

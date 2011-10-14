@@ -1,0 +1,2 @@
+#rvm --create use ruby-1.8@sample_iOs
+rvm --create use ruby-1.9.2@sample_iOS
