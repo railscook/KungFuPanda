@@ -11,7 +11,15 @@ puts "rescue"
 rescue_error_on_time(time, driver, text, code) if time > 0
 end
 end
-burglish_text = %w{min ga lar par shin nay kg lar sar pi pi lar Marks}
+
+
+p "Please type your text"
+burglish_text = gets
+burglish_text.chomp!
+burglish_text = burglish_text.split(" ")
+
+#burglish_text = %w{min ga lar par shin nay kg lar sar pi pi lar Marks}
+
 myanmar_text = []
 url="http://burglish.my-mm.org/latest/trunk/web/testarea.htm"; myText = "nay"; driver = Selenium::WebDriver.for :firefox; driver.navigate.to url; 
 burglish_text.each do |text|
@@ -19,5 +27,9 @@ burglish_text.each do |text|
 end
 driver.quit
 myanmar_text
-myanmar_text.join("")
+
+puts "Burglish Text is:"
+puts burglish_text.join(" ")
+puts "Myanmar Text is:"
+puts myanmar_text.join("")
 
