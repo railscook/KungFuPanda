@@ -1,0 +1,16 @@
+bundle
+log/
+config/database.yml
+tmp/
+.sass-cache/
+.idea/*
+*.swp
+.DS_Store
+config/.DS_Store
+db/schema.rb
+.idea/dataSources.xml
+tags
+spec/TRASH
+bin/
+solr/data
+solr/pids
