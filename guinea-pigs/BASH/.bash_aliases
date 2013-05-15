@@ -24,16 +24,9 @@ alias git_log="git log  > ~/log/git_log; head -20 ~/log/git_log"
 alias git_diff="git diff > ~/log/git_diff ; cat ~/log/git_diff"
 
 alias rails_ts="bundle exec rake ts:rebuild; rails s"
-alias git_create="git config branch.$(current_git_branch).remote origin;
-git config branch.$(current_git_branch).merge refs/heads/$(current_git_branch);
-git commit -a;
-git push origin $(current_git_branch);
-cat .git/config"
+alias git_create="git config branch.$(current_git_branch).remote origin; git config branch.$(current_git_branch).merge refs/heads/$(current_git_branch);git commit -a;git push origin $(current_git_branch);cat .git/config"
 
-alias git_create_info='echo -ne "git config branch.newbranch.remote origin
-git config branch.newbranch.merge refs/heads/newbranch
-git commit -a
-git push origin newbranch\n"'
+alias git_create_info='echo -ne "git config branch.newbranch.remote origin \n git config branch.newbranch.merge refs/heads/newbranch \n git commit -a \n git push origin newbranch \n"'
 
 alias git_delete_info='echo -ne "git checkout anotherbranch
 git branch -r -d origin/newbranch
@@ -41,9 +34,9 @@ git branch -r
 git branch -D newbranch
 git branch -l\n"'
 
-#alias myaudio="alsamixer"
-#alias terminal="gnome-terminal"
-#alias rails_partials="tail -f log/development.log | egrep 'Rendering|Rendered|Completed'"
+alias myaudio="alsamixer"
+alias terminal="gnome-terminal"
+alias rails_partials="tail -f log/development.log | egrep 'Rendering|Rendered|Completed'"
 
 alias screenshots='echo -ne "
 defaults write com.apple.screencapture location ~/Pictures/Screenshots/
@@ -71,7 +64,6 @@ alias rspec_f="rspec --format nested"
  
 alias appconflict=" grep -r '<<<<<<<' * & grep -r '=======' * & grep -r '>>>>>>>' * | grep -v log "
 alias myrails="bundle exec rake ts:rebuild; gnome-open http://0.0.0.0:3000; rails s"
-alias git_create="$(current_git_branch);echo -ne 'Current Branch is:$(current_git_branch)'; 
 alias git_push="apptest;
 git config branch.$(current_git_branch).remote origin; 
 git config branch.$(current_git_branch).merge refs/heads/$(current_git_branch);
@@ -88,6 +80,7 @@ git config branch.$(current_git_branch).merge refs/heads/$(current_git_branch)
 git commit -a
 git push origin $(current_git_branch)
 '"
+
 alias git_delete_info='echo -ne "git checkout branchY
 git branch -r -d origin/branchX
 git branch -r
@@ -95,7 +88,8 @@ git branch -D branchX
 git branch -l
 git push origin :branchX
 "'
-alias git_info='echo -ne "GIT PICKING FROM ONE BRANCH TO ANOTHER 
+
+alias git_info="echo -ne 'GIT PICKING FROM ONE BRANCH TO ANOTHER 
 git cherry-pick [BINARY CODE]\n
 GIT DELETE LAST COMMIT (LOCAL)
 git reset --soft HEAD~1 \n
@@ -122,10 +116,10 @@ git merge --abort
 GIT ASKING PASSWORD AGAIN 
 \n
 change url in vim .git/config - which is supposed to be git@github.com.... rather than https://github.com....
-[remote "origin"]
+[remote \"origin\"]
   fetch = +refs/heads/*:refs/remotes/origin/*
   url = git@github.com:andrewsage/breaking-the-cycle-server.git
-"'
+'"
 
 
 alias ssh_info="ssh bob@bob.com"
