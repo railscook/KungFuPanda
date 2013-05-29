@@ -1,0 +1,9 @@
+<div id='note-<%= note.id%>' style='border-bottom: 1px dotted gray; width:50%'>
+    <%= link_to note.text, note %> <br/>
+    <% note.attached_assets.each do |attached_asset| %>
+    <%#= image_tag attached_asset.asset.url %>
+    <div><%= link_to image_tag(attached_asset.asset.url(:thumb)), attached_asset.asset.url , :target => '_blank' %></div>
+    <% end %>
+
+    <%#= link_to 'Delete', url_for(note), :method => :delete, :remote => true, :confirm => "Are you sure that you want to delete this?" %>
+</div>

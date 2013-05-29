@@ -1,0 +1,2 @@
+class ManageNoteController < ApplicationController
+end

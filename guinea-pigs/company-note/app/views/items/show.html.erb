@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @item.title %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @item.description %>
+</p>
+
+<% @item.attached_assets.each do |attached_asset| %>
+ <% if attached_asset.image? %>
+  <%= link_to image_tag(attached_asset.asset.url(:thumb)), attached_asset.asset.url, :target => '_blank' %>
+
+ <% else %>
+
+  <%= link_to image_tag(attached_asset.asset.url(:thumb)), attached_asset.asset.url, :target => '_blank' %>
+ <% end %>
+<% end %>
+
+<%= link_to 'Edit', edit_item_path(@item) %> |
+<%= link_to 'Back', items_path %>

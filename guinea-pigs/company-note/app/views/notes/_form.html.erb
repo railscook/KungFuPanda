@@ -1,0 +1,35 @@
+<%= form_for(@note, :html=> { :multipart=> true } ) do |f| %>
+  <% if @note.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@note.errors.count, "error") %> prohibited this note from being saved:</h2>
+
+      <ul>
+      <% @note.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class='field'>
+    <%= f.text_field :text, :placeholder => "Note text" %>
+  </div>
+
+  <h1> Company </h1>
+
+  <div class="field">
+    <%#= f.label :company_id %>
+    <%= f.select :company_id, options_for_select(Company.all.map {|c| [c.name, c.id]}) %> 
+    <%#= f.hidden_field :company_id, :value => @company.id if @company %>
+  </div>
+
+ 
+
+<label>Multiple files:</label>
+
+    <%= file_field_tag('note_attached_assets_asset', multiple: true, name: "note[attached_assets_attributes][][asset]")%>
+
+    <%= f.submit 'Add' %>
+
+  </div>
+<% end %>

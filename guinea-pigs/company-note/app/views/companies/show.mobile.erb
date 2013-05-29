@@ -1,0 +1,26 @@
+<% title "Company" %>
+
+<h1>Company</h1>
+
+<ul><li>
+<%#= @company.name %>
+ <%= link_to h(@company.name), edit_company_path(@company) %>
+</li></ul>
+<h2>Notes</h2>
+<ul>
+  <% for note in @company.notes %>
+    <li class='arrow'><%= link_to h(note.text), note_path(note) %></li>
+  <% end %>
+</ul>
+
+<div>
+<%#= link_to h(company.name), edit_company_path(company) %>
+
+<%#= link_to "Click here to edit", edit_company_path, :class => "whiteButton submit"  %>
+</div>
+
+<br/>
+<div>
+<%#= link_to "Delete", url_for(@company), :method => :delete, :confirm => "Are you sure that you want to delete this?", :class => "redButton delete" %>
+</div>
+

@@ -1,0 +1,12 @@
+<% title "Companies" %>
+  <ul>
+    <% for company in @companies %>
+    <li class="arrow">
+      <%= link_to h(company.name), company %>
+      <%#= link_to h(company.name), edit_company_path(company) %>
+
+      <small class="counter"><%= company.notes.size %></small>
+    </li>
+    <% end %>
+  </ul>
+

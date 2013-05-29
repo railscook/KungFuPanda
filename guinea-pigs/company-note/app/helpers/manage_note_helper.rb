@@ -1,0 +1,2 @@
+module ManageNoteHelper
+end

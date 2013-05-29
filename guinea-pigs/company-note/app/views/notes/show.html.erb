@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Company:</b>
+  <%= @note.company.name if @note.company%>
+</p>
+
+<p>
+  <%= @note.text %>
+</p>
+
+<% @note.attached_assets.each do |attached_asset| %>
+  <%= image_tag attached_asset.asset.url(:thumb) %>
+<% end %>
+
+<p>
+<%= link_to 'Edit', edit_note_path(@note) %> |
+<%= link_to 'Back', notes_path %>
+</p>

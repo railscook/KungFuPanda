@@ -1,0 +1,8 @@
+<%= link_to 'Take note', '/notes/new' %>
+
+<%= raw "<h3>Notes</h3>" if @notes.size > 0 %>
+<div id='notes'>
+  <%= render :partial => 'note', :collection => @notes %>
+</div>
+
+<%#= render '/notes/add_note'%>

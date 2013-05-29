@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mynotes</title>
+  <%= render '/layouts/head' %>
+  <%#= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<p> <%= link_to 'Home', '/companies'%> </p>
+<p>
+    <% if mobile_device? %>
+      <%= link_to "Full Site", :mobile => 0 %>
+    <% else %>
+      <%= link_to "Mobile Site", :mobile => 1 %>
+    <% end %>
+  </p>
+
+<%= yield %>
+<hr/>
+ <%= render '/layouts/bottom' %>
+</body>
+</html>

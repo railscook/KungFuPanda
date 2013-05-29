@@ -1,0 +1,13 @@
+<div id="add_link"><%= link_to_function("Add a note", "$('add_link').hide(); $('#add_note').show()")%></div> 
+
+<div id="add_note" style="display:none;">
+        <% @note = Note.new(:company => @company) %>
+        <%= form_for([@company, @note], :remote => true) do |ff|%>
+        Note: <%= ff.text_field 'text' %>
+        <%= ff.hidden_field 'company_id', :value => @company.id %>        
+        <%= ff.submit 'Add' %> 
+        <%= link_to_function 'Reset', "$('#new_note')[0].reset();" %>
+        <% end %> 
+
+</div> 
+

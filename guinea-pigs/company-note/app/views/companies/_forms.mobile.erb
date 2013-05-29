@@ -1,0 +1,57 @@
+<%= form_for(@company) do |f| %>
+  <% if @company.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@company.errors.count, "error") %> prohibited this company from being saved:</h2>
+
+      <ul>
+      <% @company.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+ <div id='companies_form'>
+  <ul class="rounded">
+    <li><%#= f.text_field :name, :placeholder => 'Company name' %>
+     <%= text_field_tag 'companies[][name]', nil, :placeholder =>'Company name'%>
+
+  </ul>
+  <ul class="rounded">
+    <li><%#= f.text_field :description, :placeholder => 'Company description' %>
+    <%= text_field_tag 'companies[][description]', nil, :placeholder => 'Company description' %>
+  </ul>
+ </div>
+
+
+ <div id='more_form' style='display: none'>
+  <div style='border: 1px solid dotted'>
+  <ul class="rounded">
+    <li>
+     <%= text_field_tag 'foo[][name]', nil, :placeholder =>'Company name'%>
+
+  </ul>
+  <ul class="rounded">
+    <li>
+    <%= text_field_tag 'foo[][description]', nil, :placeholder => 'Company description' %>
+  </ul>
+  <%= link_to_function 'Delete', "if(confirm('Are you sure?')) $(this).parents('div:first').remove()", :class => "redButton delete"%> <br/>
+ </div>
+ </div>
+
+
+ <%= link_to_function '+', "form = $('#more_form').clone();
+                            form.find('#foo__name').attr('name', 'companies[][name]');
+                            form.find('#foo__description').attr('name', 'companies[][description]');
+                            $('#companies_form').append( form.html() ); ", 
+     :class => "whiteButton submit" %>
+
+
+
+<br/>
+<div>
+  <%= link_to_function "Submit", "$('form').submit()", :class => "whiteButton submit" %>
+</div>
+<% end %>
+
+

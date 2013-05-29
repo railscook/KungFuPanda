@@ -1,0 +1,51 @@
+def create
+    raise params.inspect
+    @note = Note.new(params[:note])
+    respond_to do |format|
+      if @note.save
+        format.mobile { redirect_to @note.company }
+        format.html { redirect_to @note.company, notice: 'Note was successfully created.' }
+        format.json { render json: @note, status: :created, location: @note }
+  #      format.js 
+      else
+        format.html { render action: "new" }
+        format.json { render json: @note.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PUT /notes/1
+  # PUT /notes/1.json
+  def update
+    @note = Note.find(params[:id])
+
+    respond_to do |format|
+      if @note.update_attributes(params[:note])
+        format.html { redirect_to @note, notice: 'Note was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @note.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /notes/1
+  # DELETE /notes/1.json
+  def destroy
+    @note = Note.find(params[:id])
+    @company = @note.company
+    @note.destroy
+
+    respond_to do |format|
+      if @company
+        format.js
+        format.html { redirect_to @company }
+        format.json { head :no_content }
+      else 
+        format.html { redirect_to notes_url }
+        format.json { head :no_content }
+      end
+    end
+  end
+end

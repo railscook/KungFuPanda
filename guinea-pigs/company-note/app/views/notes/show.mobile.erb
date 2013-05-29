@@ -1,0 +1,26 @@
+<% title 'Note' %>
+<h1>Company</h1>
+<ul><li>
+<%= link_to @note.company.name, edit_company_path(@note.company) %>
+</li></ul>
+
+<h1>Note</h1>
+<ul><li>
+<%= link_to @note.text, edit_note_path(@note) %>
+</li></ul>
+
+<h1>Attachments</h1>
+<ul><li>
+<% @note.attached_assets.each do |attached_asset| %>
+  <%= link_to image_tag(attached_asset.asset.url(:thumb)), attached_asset.asset.url, :target => '_blank' %>
+<% end %>
+</li></ul>
+
+<div>
+<%#= link_to "Edit", edit_note_path, :class => "whiteButton submit"  %>
+</div>
+
+<br/>
+<div>
+<%#= link_to "Delete", url_for(@note), :method => :delete, :confirm => "Are you sure that you want to delete this?", :class => "redButton delete" %>
+</div>
