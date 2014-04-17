@@ -1,21 +1,19 @@
 class AutoDownload
   attr_accessor :file_pattern, :link_path, :lines, :links, :dir, :sub_dir, :filename
+
   def initialize
-  	p "Please fill the pattern (e.g .mov )"
-		file_pattern = gets
-    file_pattern.chomp!
-
-		p "Please fill the link_path (e.g http://google.com/videos/ OR http://google.com/home.htm )"
-		link_path = gets 
-		link_path.chomp!
-		# Remove / at the end (because system will put / for link)
-	  if(link_path.reverse[0..0] == "/")
-	 		link_path = link_path[0..link_path.size-2]
-		end
-    @file_pattern, @link_path = file_pattern, link_path
+    @file_pattern = get_file("Please fill the pattern (e.g .mov )")
+    @link_path = get_file("Please fill the link_path (e.g http://google.com/videos/ OR http://google.com/home.htm )")
+    @link_path = @link_path[0..@link_path.size-2] if(@link_path.reverse[0..0] == "/")
     @links, @lines = [], ""
-		@dir, @sub_dir, @filename = link_path.split("/")[2], "download", "links.txt" 
+    @dir, @sub_dir, @filename = link_path.split("/")[2], "download", "links.txt" 
 
+  end
+
+  def get_file(message)
+    p message
+    data = gets
+    data.chomp!            # Remove / at the end (because system will put / for link)
   end
 
   def start
